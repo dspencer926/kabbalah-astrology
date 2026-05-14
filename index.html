@@ -47,29 +47,6 @@
       radial-gradient(1px 1px at 85% 85%, rgba(201,168,76,0.4) 0%, transparent 100%);
     pointer-events: none; z-index: 0;
   }
-  #constellation-canvas {
-    position: fixed; inset: 0;
-    width: 100%; height: 100%;
-    pointer-events: none; z-index: 0;
-  }
-  /* Hebrew letters scattered in background */
-  .hebrew-bg {
-    position: fixed; inset: 0;
-    pointer-events: none; z-index: 0;
-    overflow: hidden;
-  }
-  .heb-letter {
-    position: absolute;
-    font-family: 'Times New Roman', serif;
-    color: rgba(201,168,76,0.13);
-    user-select: none;
-    animation: heb-float linear infinite;
-  }
-  @keyframes heb-float {
-    0%   { transform: translateY(0px) rotate(var(--rot)); opacity: var(--opa); }
-    50%  { transform: translateY(-18px) rotate(var(--rot)); opacity: calc(var(--opa) * 1.6); }
-    100% { transform: translateY(0px) rotate(var(--rot)); opacity: var(--opa); }
-  }
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
@@ -83,35 +60,83 @@
   nav ul a { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mist); text-decoration: none; transition: color 0.3s; }
   nav ul a:hover { color: var(--gold-light); }
   section { position: relative; z-index: 1; }
+
   #hero {
     min-height: 100vh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     padding: 6rem 1rem 4rem;
-    position: relative; overflow: hidden; text-align: center;
+    position: relative; overflow: hidden;
+    text-align: center;
   }
   .hero-glow {
     position: absolute; width: 500px; height: 500px; border-radius: 50%;
     background: radial-gradient(ellipse, rgba(83,74,183,0.18) 0%, transparent 70%);
-    top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    pointer-events: none;
   }
-  .hero-outer { display: flex; align-items: center; justify-content: center; gap: 1.5rem; position: relative; z-index: 2; margin-bottom: 2rem; }
-  .zodiac-col { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; flex: 0 0 38px; }
-  .zodiac-sign { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(201,168,76,0.3); border-radius: 50%; font-size: 17px; color: var(--gold); opacity: 0.85; transition: opacity 0.3s; line-height: 1; }
+
+  /* Outer row: zodiac columns + inner title block */
+  .hero-outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    position: relative; z-index: 2;
+    margin-bottom: 2rem;
+  }
+
+  /* Zodiac column — 6 signs stacked */
+  .zodiac-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 38px;
+  }
+
+  .zodiac-sign {
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    font-size: 17px;
+    color: var(--gold);
+    opacity: 0.85;
+    transition: opacity 0.3s;
+    line-height: 1;
+  }
   .zodiac-sign:hover { opacity: 1; }
-  .hero-title-block { display: flex; align-items: center; justify-content: center; gap: 2rem; }
-  .hero-tree { flex: 0 0 76px; width: 76px; overflow: visible; }
+
+  /* Inner block: tree + title text + tree */
+  .hero-title-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .hero-tree {
+    flex: 0 0 76px;
+    width: 76px;
+    /* height set by viewBox aspect ratio — do not clip */
+    overflow: visible;
+  }
+
   .hero-title-text { text-align: center; }
   .hero-eyebrow { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
   .hero-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(1.8rem, 3.5vw, 3.2rem); font-weight: 400; line-height: 1.2; color: var(--white); margin-bottom: 0.4rem; }
   .hero-subtitle { font-family: 'Cinzel Decorative', serif; font-size: clamp(0.78rem, 1.4vw, 1.15rem); font-weight: 400; color: var(--gold); letter-spacing: 0.05em; }
+
   .hero-lower { position: relative; z-index: 2; text-align: center; max-width: 600px; }
   .hero-divider { width: 120px; height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); margin: 0 auto 2rem; }
   .hero-body { font-size: 1.05rem; color: var(--mist); font-style: italic; margin-bottom: 3rem; }
+
   .btn-primary { display: inline-block; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--deep); background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%); padding: 1rem 2.5rem; text-decoration: none; transition: opacity 0.3s, transform 0.3s; border: none; cursor: pointer; }
   .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
   .btn-ghost { display: inline-block; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.5); padding: 0.95rem 2.5rem; text-decoration: none; margin-left: 1rem; transition: background 0.3s, transform 0.3s; cursor: pointer; }
   .btn-ghost:hover { background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+
   #services { padding: 8rem 4rem; max-width: 1200px; margin: 0 auto; }
   .section-header { text-align: center; margin-bottom: 4.5rem; }
   .section-eyebrow { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
@@ -127,6 +152,7 @@
   .service-name { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.75rem; }
   .service-desc { color: var(--mist-dim); font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.5rem; }
   .service-price { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold); letter-spacing: 0.1em; }
+
   #testimonials { padding: 8rem 4rem; background: rgba(10,7,32,0.7); border-top: 1px solid rgba(201,168,76,0.1); border-bottom: 1px solid rgba(201,168,76,0.1); position: relative; overflow: hidden; }
   #testimonials::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(83,74,183,0.1) 0%, transparent 60%); pointer-events: none; }
   .testimonials-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
@@ -136,6 +162,7 @@
   .testimonial-text { font-style: italic; color: var(--mist); font-size: 1rem; line-height: 1.85; margin-bottom: 1.5rem; }
   .testimonial-author { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
   .testimonial-detail { font-size: 0.8rem; color: var(--mist-dim); margin-top: 0.25rem; }
+
   #contact { padding: 8rem 4rem; max-width: 900px; margin: 0 auto; text-align: center; }
   .contact-body { color: var(--mist-dim); font-style: italic; max-width: 500px; margin: 0 auto 3rem; }
   .contact-form { display: grid; gap: 1rem; max-width: 580px; margin: 0 auto; text-align: left; }
@@ -146,17 +173,57 @@
   .contact-form select option { background: #16104A; color: var(--white); }
   .contact-form textarea { resize: vertical; min-height: 130px; }
   .form-submit { text-align: center; margin-top: 0.5rem; }
+  .contact-cta {
+    text-align: center;
+    padding: 2rem 2.5rem;
+    background: rgba(22,16,74,0.4);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 2px;
+    margin: 2rem auto 0;
+    max-width: 500px;
+    position: relative;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .contact-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .contact-cta:hover {
+    background: rgba(22,16,74,0.6);
+    border-color: rgba(201,168,76,0.4);
+  }
+  .contact-cta-label {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .contact-email {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--gold-light);
+    text-decoration: none;
+    transition: color 0.3s;
+    display: inline-block;
+  }
+  .contact-email:hover {
+    color: var(--white);
+  }
   footer { text-align: center; padding: 2.5rem 4rem; border-top: 1px solid rgba(201,168,76,0.1); position: relative; z-index: 1; }
   .footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 0.5rem; }
   .footer-copy { font-size: 0.8rem; color: var(--mist-dim); font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
 </style>
 </head>
 <body>
-
-<!-- Hebrew letter background layer -->
-<div class="hebrew-bg" id="hebrew-bg"></div>
-
-<canvas id="constellation-canvas"></canvas>
 
 <nav>
   <div class="nav-logo">Malachi Tanoh · Kabbalistic Astrology</div>
@@ -169,7 +236,10 @@
 
 <section id="hero">
   <div class="hero-glow"></div>
+
   <div class="hero-outer">
+
+    <!-- LEFT ZODIAC: Aries, Taurus, Gemini, Cancer, Leo, Virgo -->
     <div class="zodiac-col">
       <div class="zodiac-sign" title="Aries">♈</div>
       <div class="zodiac-sign" title="Taurus">♉</div>
@@ -178,45 +248,152 @@
       <div class="zodiac-sign" title="Leo">♌</div>
       <div class="zodiac-sign" title="Virgo">♍</div>
     </div>
+
+    <!-- INNER: tree + title text + tree -->
     <div class="hero-title-block">
-      <svg class="hero-tree" viewBox="0 0 80 210" fill="none" style="height:auto;">
-        <defs><radialGradient id="gl" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C9A84C" stop-opacity="0.45"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></radialGradient></defs>
-        <circle cx="40" cy="12" r="16" fill="url(#gl)"/><circle cx="66" cy="40" r="14" fill="url(#gl)"/><circle cx="14" cy="40" r="14" fill="url(#gl)"/><circle cx="66" cy="86" r="14" fill="url(#gl)"/><circle cx="14" cy="86" r="14" fill="url(#gl)"/><circle cx="40" cy="110" r="16" fill="url(#gl)"/><circle cx="66" cy="154" r="14" fill="url(#gl)"/><circle cx="14" cy="154" r="14" fill="url(#gl)"/><circle cx="40" cy="174" r="13" fill="url(#gl)"/><circle cx="40" cy="198" r="13" fill="url(#gl)"/>
-        <line x1="40" y1="12" x2="66" y2="40" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="12" x2="14" y2="40" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="12" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="40" x2="14" y2="40" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="40" x2="66" y2="86" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="40" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="40" x2="14" y2="86" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="40" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="86" x2="14" y2="86" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="86" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="86" x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="86" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="86" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="110" x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="110" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="110" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="154" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="174" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
-        <circle cx="40" cy="64" r="7" stroke="#C9A84C" stroke-width="0.9" stroke-dasharray="3 2" stroke-opacity="0.6"/><circle cx="40" cy="64" r="2" fill="#C9A84C" fill-opacity="0.3"/>
-        <circle cx="40" cy="12" r="9" stroke="#C9A84C" stroke-width="1.6" stroke-opacity="0.95"/><circle cx="40" cy="12" r="3" fill="#C9A84C" fill-opacity="0.9"/>
-        <circle cx="66" cy="40" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="66" cy="40" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="14" cy="40" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="14" cy="40" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="66" cy="86" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="66" cy="86" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="14" cy="86" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="14" cy="86" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="40" cy="110" r="10" stroke="#C9A84C" stroke-width="1.8" stroke-opacity="0.95"/><circle cx="40" cy="110" r="3.5" fill="#C9A84C" fill-opacity="0.9"/>
-        <circle cx="66" cy="154" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="66" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="14" cy="154" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="14" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="40" cy="174" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="40" cy="174" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="40" cy="198" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="40" cy="198" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+
+      <!-- LEFT TREE — full viewBox so nothing clips -->
+      <svg class="hero-tree" viewBox="0 0 80 210" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:auto;">
+        <defs>
+          <radialGradient id="gl" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Glow halos -->
+        <circle cx="40" cy="12"  r="16" fill="url(#gl)"/>
+        <circle cx="66" cy="40"  r="14" fill="url(#gl)"/>
+        <circle cx="14" cy="40"  r="14" fill="url(#gl)"/>
+        <circle cx="66" cy="86"  r="14" fill="url(#gl)"/>
+        <circle cx="14" cy="86"  r="14" fill="url(#gl)"/>
+        <circle cx="40" cy="110" r="16" fill="url(#gl)"/>
+        <circle cx="66" cy="154" r="14" fill="url(#gl)"/>
+        <circle cx="14" cy="154" r="14" fill="url(#gl)"/>
+        <circle cx="40" cy="174" r="13" fill="url(#gl)"/>
+        <circle cx="40" cy="198" r="13" fill="url(#gl)"/>
+        <!-- 22 Paths -->
+        <line x1="40" y1="12"  x2="66" y2="40"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="12"  x2="14" y2="40"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="12"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="40"  x2="14" y2="40"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="40"  x2="66" y2="86"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="40"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="40"  x2="14" y2="86"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="40"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="86"  x2="14" y2="86"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="86"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="86"  x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="86"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="86"  x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="110" x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="110" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="110" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="154" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="174" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <!-- Da'at -->
+        <circle cx="40" cy="64" r="7"  stroke="#C9A84C" stroke-width="0.9" stroke-dasharray="3 2" stroke-opacity="0.6"/>
+        <circle cx="40" cy="64" r="2"  fill="#C9A84C" fill-opacity="0.3"/>
+        <!-- 10 Sephirot -->
+        <circle cx="40" cy="12"  r="9"   stroke="#C9A84C" stroke-width="1.6" stroke-opacity="0.95"/>
+        <circle cx="40" cy="12"  r="3"   fill="#C9A84C" fill-opacity="0.9"/>
+        <circle cx="66" cy="40"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="66" cy="40"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="14" cy="40"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="14" cy="40"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="66" cy="86"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="66" cy="86"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="14" cy="86"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="14" cy="86"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="40" cy="110" r="10"  stroke="#C9A84C" stroke-width="1.8" stroke-opacity="0.95"/>
+        <circle cx="40" cy="110" r="3.5" fill="#C9A84C" fill-opacity="0.9"/>
+        <circle cx="66" cy="154" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="66" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="14" cy="154" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="14" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="40" cy="174" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="40" cy="174" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="40" cy="198" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="40" cy="198" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
       </svg>
+
       <div class="hero-title-text">
-        <p class="hero-eyebrow">Where the Stars Meet the Sacred</p>
+        <p class="hero-eyebrow">Divine Communication Through the Stars</p>
         <h1 class="hero-title">Malachi Tanoh</h1>
-        <p class="hero-subtitle">Kabbalistic Astrology & Soul Readings</p>
+        <p class="hero-subtitle">Kabbalistic Astrology</p>
+        <p class="hero-subtitle">Reincarnation & Soul Readings</p>
       </div>
-      <svg class="hero-tree" viewBox="0 0 80 210" fill="none" style="height:auto;">
-        <defs><radialGradient id="gr" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C9A84C" stop-opacity="0.45"/><stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/></radialGradient></defs>
-        <circle cx="40" cy="12" r="16" fill="url(#gr)"/><circle cx="66" cy="40" r="14" fill="url(#gr)"/><circle cx="14" cy="40" r="14" fill="url(#gr)"/><circle cx="66" cy="86" r="14" fill="url(#gr)"/><circle cx="14" cy="86" r="14" fill="url(#gr)"/><circle cx="40" cy="110" r="16" fill="url(#gr)"/><circle cx="66" cy="154" r="14" fill="url(#gr)"/><circle cx="14" cy="154" r="14" fill="url(#gr)"/><circle cx="40" cy="174" r="13" fill="url(#gr)"/><circle cx="40" cy="198" r="13" fill="url(#gr)"/>
-        <line x1="40" y1="12" x2="66" y2="40" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="12" x2="14" y2="40" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="12" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="40" x2="14" y2="40" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="40" x2="66" y2="86" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="40" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="40" x2="14" y2="86" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="40" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="86" x2="14" y2="86" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="86" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="86" x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="86" x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="86" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="110" x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="110" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="110" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="154" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="66" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="14" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/><line x1="40" y1="174" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
-        <circle cx="40" cy="64" r="7" stroke="#C9A84C" stroke-width="0.9" stroke-dasharray="3 2" stroke-opacity="0.6"/><circle cx="40" cy="64" r="2" fill="#C9A84C" fill-opacity="0.3"/>
-        <circle cx="40" cy="12" r="9" stroke="#C9A84C" stroke-width="1.6" stroke-opacity="0.95"/><circle cx="40" cy="12" r="3" fill="#C9A84C" fill-opacity="0.9"/>
-        <circle cx="66" cy="40" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="66" cy="40" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="14" cy="40" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="14" cy="40" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="66" cy="86" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="66" cy="86" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="14" cy="86" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="14" cy="86" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="40" cy="110" r="10" stroke="#C9A84C" stroke-width="1.8" stroke-opacity="0.95"/><circle cx="40" cy="110" r="3.5" fill="#C9A84C" fill-opacity="0.9"/>
-        <circle cx="66" cy="154" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="66" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="14" cy="154" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="14" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="40" cy="174" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="40" cy="174" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
-        <circle cx="40" cy="198" r="8" stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/><circle cx="40" cy="198" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+
+      <!-- RIGHT TREE -->
+      <svg class="hero-tree" viewBox="0 0 80 210" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:auto;">
+        <defs>
+          <radialGradient id="gr" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="40" cy="12"  r="16" fill="url(#gr)"/>
+        <circle cx="66" cy="40"  r="14" fill="url(#gr)"/>
+        <circle cx="14" cy="40"  r="14" fill="url(#gr)"/>
+        <circle cx="66" cy="86"  r="14" fill="url(#gr)"/>
+        <circle cx="14" cy="86"  r="14" fill="url(#gr)"/>
+        <circle cx="40" cy="110" r="16" fill="url(#gr)"/>
+        <circle cx="66" cy="154" r="14" fill="url(#gr)"/>
+        <circle cx="14" cy="154" r="14" fill="url(#gr)"/>
+        <circle cx="40" cy="174" r="13" fill="url(#gr)"/>
+        <circle cx="40" cy="198" r="13" fill="url(#gr)"/>
+        <line x1="40" y1="12"  x2="66" y2="40"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="12"  x2="14" y2="40"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="12"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="40"  x2="14" y2="40"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="40"  x2="66" y2="86"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="40"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="40"  x2="14" y2="86"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="40"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="86"  x2="14" y2="86"  stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="86"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="86"  x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="86"  x2="40" y2="110" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="86"  x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="110" x2="66" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="110" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="110" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="154" x2="14" y2="154" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="66" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="154" x2="40" y2="174" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="14" y1="154" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <line x1="40" y1="174" x2="40" y2="198" stroke="#C9A84C" stroke-width="1.1" stroke-opacity="0.85"/>
+        <circle cx="40" cy="64" r="7"  stroke="#C9A84C" stroke-width="0.9" stroke-dasharray="3 2" stroke-opacity="0.6"/>
+        <circle cx="40" cy="64" r="2"  fill="#C9A84C" fill-opacity="0.3"/>
+        <circle cx="40" cy="12"  r="9"   stroke="#C9A84C" stroke-width="1.6" stroke-opacity="0.95"/>
+        <circle cx="40" cy="12"  r="3"   fill="#C9A84C" fill-opacity="0.9"/>
+        <circle cx="66" cy="40"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="66" cy="40"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="14" cy="40"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="14" cy="40"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="66" cy="86"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="66" cy="86"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="14" cy="86"  r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="14" cy="86"  r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="40" cy="110" r="10"  stroke="#C9A84C" stroke-width="1.8" stroke-opacity="0.95"/>
+        <circle cx="40" cy="110" r="3.5" fill="#C9A84C" fill-opacity="0.9"/>
+        <circle cx="66" cy="154" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="66" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="14" cy="154" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="14" cy="154" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="40" cy="174" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="40" cy="174" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
+        <circle cx="40" cy="198" r="8"   stroke="#C9A84C" stroke-width="1.4" stroke-opacity="0.95"/>
+        <circle cx="40" cy="198" r="2.5" fill="#C9A84C" fill-opacity="0.85"/>
       </svg>
+
     </div>
+
+    <!-- RIGHT ZODIAC: Libra, Scorpio, Sagittarius, Capricorn, Aquarius, Pisces -->
     <div class="zodiac-col">
       <div class="zodiac-sign" title="Libra">♎</div>
       <div class="zodiac-sign" title="Scorpio">♏</div>
@@ -225,10 +402,12 @@
       <div class="zodiac-sign" title="Aquarius">♒</div>
       <div class="zodiac-sign" title="Pisces">♓</div>
     </div>
+
   </div>
+
   <div class="hero-lower">
     <div class="hero-divider"></div>
-    <p class="hero-body">Unlock the celestial map encoded in your birth. Through the union of Kabbalah and astrology, discover your soul's purpose, karmic pathways, and the divine light awaiting within you.</p>
+    <p class="hero-body">Unlock the celestial map encoded in your birth.  Discover your soul's purpose, Tikkun (soul's rectification), and the divine light awaiting within you, through Kabbalistic astrology.</p>
     <div>
       <a href="#contact" class="btn-primary">Book a Reading</a>
       <a href="#services" class="btn-ghost">Explore Services</a>
@@ -236,42 +415,146 @@
   </div>
 </section>
 
+<!-- SERVICES -->
 <section id="services">
   <div class="section-header">
-    <p class="section-eyebrow">Offerings of Light</p>
-    <h2 class="section-title">Sacred Services</h2>
+    <p class="section-eyebrow">Divine Guidance</p>
+    <h2 class="section-title">Services Offered</h2>
     <div class="section-line"></div>
     <p class="section-desc">Each reading is a unique journey through the Tree of Life, guided by your natal chart and the wisdom of the Zohar.</p>
   </div>
   <div class="services-grid">
-    <div class="service-card"><svg class="service-sigil" viewBox="0 0 52 52" fill="none"><polygon points="26,4 46,40 6,40" stroke="#C9A84C" stroke-width="1.5" fill="none"/><polygon points="26,48 6,12 46,12" stroke="#C9A84C" stroke-width="1.5" fill="none"/><circle cx="26" cy="26" r="6" stroke="#C9A84C" stroke-width="1"/></svg><p class="service-name">Natal Soul Reading</p><p class="service-desc">A deep exploration of your birth chart through the lens of the ten Sephirot, revealing the divine blueprint of your soul and its mission in this lifetime.</p><p class="service-price">90 min · $185</p></div>
-    <div class="service-card"><svg class="service-sigil" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="20" stroke="#C9A84C" stroke-width="1.5"/><path d="M26 6 L26 46" stroke="#C9A84C" stroke-width="1" opacity="0.5"/><path d="M6 26 L46 26" stroke="#C9A84C" stroke-width="1" opacity="0.5"/><circle cx="26" cy="26" r="5" fill="none" stroke="#C9A84C" stroke-width="1.5"/><circle cx="26" cy="26" r="2" fill="#C9A84C"/></svg><p class="service-name">Transit & Timing</p><p class="service-desc">Understand the celestial currents flowing through your life now. Align your actions with cosmic timing using Kabbalistic numerology and planetary transits.</p><p class="service-price">60 min · $130</p></div>
-    <div class="service-card"><svg class="service-sigil" viewBox="0 0 52 52" fill="none"><circle cx="19" cy="26" r="14" stroke="#C9A84C" stroke-width="1.5" fill="none"/><circle cx="33" cy="26" r="14" stroke="#C9A84C" stroke-width="1.5" fill="none"/><circle cx="26" cy="26" r="3" fill="#C9A84C"/></svg><p class="service-name">Relationship Synastry</p><p class="service-desc">Explore the soul contracts between you and a partner, friend, or family member. Discover the Kabbalistic purpose of your connection and its divine geometry.</p><p class="service-price">75 min · $155</p></div>
-    <div class="service-card"><svg class="service-sigil" viewBox="0 0 52 52" fill="none"><path d="M26 26 m0 -18 a18 18 0 1 1 -0.1 0" stroke="#C9A84C" stroke-width="1.5" fill="none"/><path d="M26 26 m0 -10 a10 10 0 1 1 -0.1 0" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/><line x1="26" y1="8" x2="26" y2="2" stroke="#C9A84C" stroke-width="1.5"/><line x1="44" y1="26" x2="50" y2="26" stroke="#C9A84C" stroke-width="1.5"/></svg><p class="service-name">Year Ahead Forecast</p><p class="service-desc">A comprehensive solar return reading woven with Kabbalistic insight — illuminating the themes, challenges, and openings that await you in the coming year.</p><p class="service-price">75 min · $150</p></div>
-  </div>
-</section>
-
-<section id="testimonials">
-  <div class="testimonials-inner">
-    <div class="section-header"><p class="section-eyebrow">Words from Seekers</p><h2 class="section-title">Testimonials</h2><div class="section-line"></div></div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card"><div class="testimonial-mark">&ldquo;</div><p class="testimonial-text">Malachi's reading was unlike anything I've experienced. He connected the movements of the planets to the Sefirot in a way that made my life suddenly make sense — as if I'd been handed a map of my own soul.</p><p class="testimonial-author">Daniela R.</p><p class="testimonial-detail">Natal Soul Reading, Tel Aviv</p></div>
-      <div class="testimonial-card"><div class="testimonial-mark">&ldquo;</div><p class="testimonial-text">I came to him at a crossroads, unsure of a major decision. The transit reading gave me not just clarity but a profound sense of being held by something larger. I left in tears — the good kind.</p><p class="testimonial-author">Samuel K.</p><p class="testimonial-detail">Transit & Timing Reading, New York</p></div>
-      <div class="testimonial-card"><div class="testimonial-mark">&ldquo;</div><p class="testimonial-text">The synastry session Malachi conducted for my partner and me revealed soul-level connections we had sensed but couldn't articulate. We now understand our relationship as a sacred practice.</p><p class="testimonial-author">Leah & Aaron M.</p><p class="testimonial-detail">Relationship Synastry, London</p></div>
+    <div class="service-card">
+      <svg class="service-sigil" viewBox="0 0 52 52" fill="none">
+        <polygon points="26,4 46,40 6,40" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <polygon points="26,48 6,12 46,12" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="26" cy="26" r="6" stroke="#C9A84C" stroke-width="1"/>
+      </svg>
+      <p class="service-name">Natal Soul Reading</p>
+      <p class="service-desc">A deep exploration of your birth chart through the lens of the ten Sephirot, revealing the divine blueprint of your soul and its mission in this lifetime.</p>
+      <p class="service-price">90 min · $150</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-sigil" viewBox="0 0 52 52" fill="none">
+        <circle cx="26" cy="26" r="20" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M26 6 L26 46" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+        <path d="M6 26 L46 26" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+        <path d="M11 11 L41 41" stroke="#C9A84C" stroke-width="1" opacity="0.3"/>
+        <path d="M41 11 L11 41" stroke="#C9A84C" stroke-width="1" opacity="0.3"/>
+        <circle cx="26" cy="26" r="5" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+        <circle cx="26" cy="26" r="2" fill="#C9A84C"/>
+      </svg>
+      <p class="service-name">Transit & Timing</p>
+      <p class="service-desc">Understand the celestial currents flowing through your life now. Align your actions with cosmic timing using Kabbalistic numerology and planetary transits.</p>
+      <p class="service-price">60 min · $100</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-sigil" viewBox="0 0 52 52" fill="none">
+        <circle cx="19" cy="26" r="14" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="33" cy="26" r="14" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <circle cx="26" cy="26" r="3" fill="#C9A84C"/>
+      </svg>
+      <p class="service-name">Relationship Synastry</p>
+      <p class="service-desc">Explore the soul contracts between you and a partner, friend, or family member. Discover the Kabbalistic purpose of your connection and its divine geometry.</p>
+      <p class="service-price">60 min · $100</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-sigil" viewBox="0 0 52 52" fill="none">
+        <path d="M26 26 m0 -18 a18 18 0 1 1 -0.1 0" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+        <path d="M26 26 m0 -10 a10 10 0 1 1 -0.1 0" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M26 26 m0 -4 a4 4 0 1 1 -0.1 0" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.4"/>
+        <line x1="26" y1="8" x2="26" y2="2" stroke="#C9A84C" stroke-width="1.5"/>
+        <line x1="44" y1="26" x2="50" y2="26" stroke="#C9A84C" stroke-width="1.5"/>
+      </svg>
+      <p class="service-name">Year Ahead Forecast</p>
+      <p class="service-desc">A comprehensive solar return reading woven with Kabbalistic insight, illuminating the themes, challenges, and openings that await you in the coming year.</p>
+      <p class="service-price">30 min · $50</p>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="section-header"><p class="section-eyebrow">Begin Your Journey</p><h2 class="section-title">Book a Reading</h2><div class="section-line"></div><p class="contact-body">All readings are conducted via Zoom or in person in New York City. Please include your birth details and a few words about what draws you to this work.</p></div>
-  <div class="contact-form">
-    <div class="form-row"><input type="text" placeholder="Your Name"><input type="email" placeholder="Email Address"></div>
-    <div class="form-row"><input type="text" placeholder="Date of Birth"><input type="text" placeholder="Place of Birth"></div>
-    <input type="text" placeholder="Time of Birth (if known)">
-    <select><option value="" disabled selected>Select a Service</option><option>Natal Soul Reading — 90 min · $185</option><option>Transit & Timing — 60 min · $130</option><option>Relationship Synastry — 75 min · $155</option><option>Year Ahead Forecast — 75 min · $150</option></select>
-    <textarea placeholder="What calls you to seek this reading? Share anything you feel guided to..."></textarea>
-    <div class="form-submit"><a href="#" class="btn-primary">Send My Request</a></div>
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <p class="section-eyebrow">Words from Seekers</p>
+      <h2 class="section-title">Testimonials</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-mark">&ldquo;</div>
+        <p class="testimonial-text">
+          I'm really grateful to my friend Malachi for taking the time to create my birth chart and explain it
+          in a way that actually made sense to me.  He connected both astrology and Kabbalah ideas especially my
+          spiritual pirpose in a clear and thoughful way.  I walked away with a deeper understanding of myself 
+          and a lot to reflect on. I appreciate his insight and the effort he put into it.  
+          Highly recommended.
+        </p>
+        <p class="testimonial-author">Ziv Z.</p>
+        <p class="testimonial-detail">Natal Soul Reading, New York</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-mark">&ldquo;</div>
+        <p class="testimonial-text">
+            I've always been interested in birth charts, but the Kabbalistic approach Malachi uses is on another level.
+            It helped me understand my strengths and challenges in a way that felt incredibly accurate and practical.
+            Truly life changing insights.  Malachi has been a huge help in seeing myself as a person through 
+            Kabbalah and birth charts.
+        </p>        
+        <p class="testimonial-author">Yakir</p>
+        <p class="testimonial-detail">Natal Soul and Transit Reading, New York</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-mark">&ldquo;</div>
+        <p class="testimonial-text">
+          When Malachi did my birth chart I was really impressed by the depth of knowledge he displayed
+          and the insight that it gave me with respect to my life's path.  It was impressively accurate and
+          I've been able to use it to navigate life's challenges and opportunities with greater clarity and confidence.
+          I would highly recommend his services to anyone who is looking for a better understanding of themselves and
+          their life's purpose, novice and expert alike!
+        </p>
+        <p class="testimonial-author">Dave S.</p>
+        <p class="testimonial-detail">Natal Soul Reading, New York</p>
+      </div>
+    </div>
   </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <p class="section-eyebrow">Begin Your Journey</p>
+    <h2 class="section-title">Book a Reading</h2>
+    <div class="section-line"></div>
+    <p class="contact-body">All readings are conducted via Zoom or in person in New York City. Please include your birth details and a few words about what draws you to this work.</p>
+  </div>
+  <div class="contact-cta">
+    <p class="contact-cta-label">Contact for Booking</p>
+    <a class="contact-email" href="mailto:angelomaxime87@gmail.com">angelomaxime87@gmail.com</a>
+  </div>
+  <!-- <div class="contact-form">
+    <div class="form-row">
+      <input type="text" placeholder="Your Name">
+      <input type="email" placeholder="Email Address">
+    </div>
+    <div class="form-row">
+      <input type="text" placeholder="Date of Birth">
+      <input type="text" placeholder="Place of Birth">
+    </div>
+    <input type="text" placeholder="Time of Birth (if known)">
+    <select>
+      <option value="" disabled selected>Select a Service</option>
+      <option>Natal Soul Reading — 90 min · $185</option>
+      <option>Transit & Timing — 60 min · $130</option>
+      <option>Relationship Synastry — 75 min · $155</option>
+      <option>Year Ahead Forecast — 75 min · $150</option>
+    </select>
+    <textarea placeholder="What calls you to seek this reading? Share anything you feel guided to..."></textarea>
+    <div class="form-submit">
+      <a href="#" class="btn-primary">Send My Request</a>
+    </div>
+  </div> -->
 </section>
 
 <footer>
@@ -279,145 +562,5 @@
   <p class="footer-copy">Kabbalistic Astrology · New York City · Sessions by appointment</p>
 </footer>
 
-<script>
-// ── Hebrew letters ─────────────────────────────────────────────────────────
-// All 22 letters of the Aleph-Bet, each corresponding to a path on the Tree
-const hebrewLetters = [
-  'א','ב','ג','ד','ה','ו','ז','ח','ט','י',
-  'כ','ל','מ','נ','ס','ע','פ','צ','ק','ר','ש','ת'
-];
-
-const container = document.getElementById('hebrew-bg');
-
-// Place ~55 letters scattered across the full page
-const positions = [
-  [3,4],[8,12],[15,7],[22,18],[28,3],[34,25],[40,11],[47,6],[53,19],[60,8],
-  [66,15],[73,4],[80,22],[87,9],[93,18],[6,30],[12,38],[19,45],[25,33],[31,52],
-  [37,42],[44,35],[50,48],[57,38],[63,55],[70,44],[76,32],[83,50],[90,38],[96,45],
-  [4,62],[10,70],[17,58],[23,75],[29,65],[35,80],[41,68],[48,73],[55,62],[61,78],
-  [68,65],[74,82],[80,70],[86,58],[92,75],[5,88],[11,95],[18,83],[24,92],[30,85],
-  [50,90],[65,88],[78,95],[90,83],[95,92]
-];
-
-hebrewLetters.forEach((_, letterIdx) => {
-  // Place 2–3 instances of each letter
-  const count = letterIdx < 11 ? 3 : 2;
-  for (let k = 0; k < count; k++) {
-    const posIdx = (letterIdx * 3 + k * 7) % positions.length;
-    const [lx, ly] = positions[posIdx];
-    const size = 28 + Math.random() * 52; // 28–80px — mix of small and large
-    const opacity = 0.10 + Math.random() * 0.18; // 0.10–0.28 — ghostly but visible
-    const rotation = (Math.random() - 0.5) * 25;
-    const duration = 4 + Math.random() * 6;
-    const delay = Math.random() * -8;
-
-    const el = document.createElement('span');
-    el.className = 'heb-letter';
-    el.textContent = hebrewLetters[letterIdx];
-    el.style.cssText = `
-      left: ${lx + (k * 11)}%;
-      top: ${ly + (k * 8)}%;
-      font-size: ${Math.round(size)}px;
-      --opa: ${opacity.toFixed(2)};
-      --rot: ${rotation.toFixed(1)}deg;
-      animation-duration: ${duration.toFixed(1)}s;
-      animation-delay: ${delay.toFixed(1)}s;
-      color: rgba(201,168,76,${opacity.toFixed(2)});
-    `;
-    container.appendChild(el);
-  }
-});
-
-// ── Constellation canvas ───────────────────────────────────────────────────
-const canvas = document.getElementById('constellation-canvas');
-const ctx = canvas.getContext('2d');
-
-const constellations = [
-  { name: 'Aries',       stars: [[0.5,0.1],[0.3,0.4],[0.6,0.55],[0.8,0.45],[0.9,0.7]],                                                                         edges: [[0,1],[1,2],[2,3],[3,4]] },
-  { name: 'Taurus',      stars: [[0.5,0.1],[0.3,0.3],[0.1,0.5],[0.4,0.55],[0.6,0.5],[0.8,0.35],[0.7,0.7],[0.5,0.8]],                                           edges: [[0,1],[1,2],[1,3],[3,4],[4,5],[4,6],[6,7]] },
-  { name: 'Gemini',      stars: [[0.2,0.05],[0.8,0.05],[0.15,0.3],[0.75,0.3],[0.2,0.55],[0.8,0.55],[0.25,0.75],[0.75,0.75],[0.3,0.95],[0.7,0.95]],             edges: [[0,1],[0,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6,8],[7,9]] },
-  { name: 'Cancer',      stars: [[0.3,0.2],[0.7,0.2],[0.2,0.55],[0.8,0.55],[0.4,0.75],[0.6,0.75]],                                                             edges: [[0,1],[0,2],[1,3],[2,4],[3,5],[4,5]] },
-  { name: 'Leo',         stars: [[0.1,0.35],[0.25,0.12],[0.45,0.06],[0.6,0.22],[0.5,0.42],[0.3,0.52],[0.1,0.62],[0.7,0.62],[0.85,0.82],[0.6,0.88]],           edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[5,6],[4,7],[7,8],[8,9]] },
-  { name: 'Virgo',       stars: [[0.5,0.05],[0.3,0.22],[0.6,0.32],[0.2,0.52],[0.5,0.52],[0.75,0.47],[0.3,0.72],[0.6,0.77],[0.5,0.95]],                        edges: [[0,1],[0,2],[1,3],[2,4],[4,3],[4,5],[3,6],[4,7],[6,8]] },
-  { name: 'Libra',       stars: [[0.3,0.2],[0.7,0.2],[0.5,0.05],[0.2,0.62],[0.5,0.52],[0.8,0.62],[0.5,0.92]],                                                  edges: [[0,2],[2,1],[0,3],[3,4],[4,1],[1,5],[3,6],[4,6]] },
-  { name: 'Scorpius',    stars: [[0.5,0.05],[0.35,0.22],[0.55,0.32],[0.4,0.47],[0.5,0.57],[0.35,0.67],[0.2,0.77],[0.15,0.92],[0.3,0.97],[0.5,0.87]],          edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[7,9]] },
-  { name: 'Sagittarius', stars: [[0.5,0.1],[0.2,0.2],[0.8,0.25],[0.4,0.4],[0.65,0.45],[0.2,0.62],[0.55,0.67],[0.75,0.72],[0.4,0.87]],                         edges: [[0,1],[0,2],[0,3],[3,4],[1,5],[3,5],[4,6],[6,7],[5,8]] },
-  { name: 'Capricornus', stars: [[0.1,0.2],[0.35,0.1],[0.6,0.15],[0.85,0.3],[0.75,0.57],[0.5,0.67],[0.25,0.62],[0.1,0.47]],                                   edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0]] },
-  { name: 'Aquarius',    stars: [[0.15,0.3],[0.4,0.2],[0.6,0.1],[0.8,0.25],[0.5,0.47],[0.25,0.57],[0.55,0.67],[0.8,0.62],[0.4,0.82],[0.6,0.92]],              edges: [[0,1],[1,2],[2,3],[1,4],[4,5],[4,6],[6,7],[5,8],[6,9]] },
-  { name: 'Pisces',      stars: [[0.1,0.42],[0.3,0.22],[0.5,0.1],[0.7,0.22],[0.9,0.42],[0.75,0.62],[0.5,0.72],[0.25,0.62],[0.5,0.88]],                        edges: [[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,0],[6,8]] }
-];
-
-const placements = [
-  [0.03,0.03,150],[0.76,0.01,140],[0.87,0.16,145],[0.01,0.20,140],
-  [0.90,0.40,150],[0.01,0.47,145],[0.83,0.63,145],[0.03,0.68,145],
-  [0.12,0.87,140],[0.72,0.84,145],[0.44,0.91,135],[0.46,0.01,140],
-];
-
-let W, H;
-const phases = constellations.map(() => Math.random() * Math.PI * 2);
-const starPhases = constellations.map(c => c.stars.map(() => Math.random() * Math.PI * 2));
-
-function resize() {
-  W = canvas.width  = window.innerWidth;
-  H = canvas.height = Math.max(document.body.scrollHeight, window.innerHeight);
-}
-
-function drawStar(x, y, r, alpha) {
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, Math.PI * 2);
-  ctx.fillStyle = `rgba(255,240,180,${alpha})`;
-  ctx.fill();
-  const grd = ctx.createRadialGradient(x, y, 0, x, y, r * 4);
-  grd.addColorStop(0,   `rgba(240,208,120,${alpha * 0.6})`);
-  grd.addColorStop(0.4, `rgba(201,168,76,${alpha * 0.25})`);
-  grd.addColorStop(1,   `rgba(201,168,76,0)`);
-  ctx.beginPath();
-  ctx.arc(x, y, r * 4, 0, Math.PI * 2);
-  ctx.fillStyle = grd;
-  ctx.fill();
-  if (r > 2) {
-    ctx.strokeStyle = `rgba(255,240,180,${alpha * 0.5})`;
-    ctx.lineWidth = 0.6;
-    ctx.beginPath(); ctx.moveTo(x - r*5, y); ctx.lineTo(x + r*5, y); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(x, y - r*5); ctx.lineTo(x, y + r*5); ctx.stroke();
-  }
-}
-
-function draw(t) {
-  ctx.clearRect(0, 0, W, H);
-  constellations.forEach((c, i) => {
-    const [px, py, size] = placements[i];
-    const ox = px * W, oy = py * H;
-    const globalTwinkle = 0.5 + 0.5 * Math.sin(t * 0.0006 + phases[i]);
-    const lineAlpha = 0.55 + 0.3 * globalTwinkle;
-    ctx.lineWidth = 1.4;
-    c.edges.forEach(([a, b]) => {
-      const [ax, ay] = c.stars[a], [bx, by] = c.stars[b];
-      const grd = ctx.createLinearGradient(ox+ax*size, oy+ay*size, ox+bx*size, oy+by*size);
-      grd.addColorStop(0,   `rgba(201,168,76,${lineAlpha})`);
-      grd.addColorStop(0.5, `rgba(240,208,120,${lineAlpha * 0.9})`);
-      grd.addColorStop(1,   `rgba(201,168,76,${lineAlpha})`);
-      ctx.strokeStyle = grd;
-      ctx.beginPath();
-      ctx.moveTo(ox + ax * size, oy + ay * size);
-      ctx.lineTo(ox + bx * size, oy + by * size);
-      ctx.stroke();
-    });
-    c.stars.forEach(([sx, sy], si) => {
-      const tw = 0.5 + 0.5 * Math.sin(t * 0.001 + starPhases[i][si]);
-      drawStar(ox + sx * size, oy + sy * size, 2.2 + 1.4 * tw, 0.75 + 0.25 * tw);
-    });
-    ctx.font = '600 10px Cinzel, serif';
-    ctx.fillStyle = `rgba(240,208,120,${0.7 + 0.25 * globalTwinkle})`;
-    ctx.textAlign = 'center';
-    ctx.fillText(c.name.toUpperCase(), ox + size * 0.5, oy + size + 16);
-  });
-}
-
-function loop(t) { draw(t); requestAnimationFrame(loop); }
-window.addEventListener('resize', resize);
-resize();
-requestAnimationFrame(loop);
-</script>
 </body>
 </html>
