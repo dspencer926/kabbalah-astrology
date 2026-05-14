@@ -56,6 +56,32 @@
     backdrop-filter: blur(8px);
   }
   .nav-logo { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
+  .nav-logo-full { display: inline; }
+  .nav-logo-short { display: none; }
+  @media (max-width: 768px) {
+    .nav-logo-full { display: none; }
+    .nav-logo-short { display: inline; }
+    nav { padding: 1.2rem 1.5rem; }
+    nav ul { gap: 1.5rem; }
+    nav ul a { font-size: 10px; }
+    .hero-lower > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn-ghost {
+      margin-left: 0;
+    }
+    .contact-email {
+      font-size: 0.95rem;
+      word-break: break-all;
+      max-width: 100%;
+    }
+    .contact-cta {
+      padding: 2rem 1.5rem;
+    }
+  }
   nav ul { list-style: none; display: flex; gap: 2.5rem; }
   nav ul a { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mist); text-decoration: none; transition: color 0.3s; }
   nav ul a:hover { color: var(--gold-light); }
@@ -221,13 +247,33 @@
   footer { text-align: center; padding: 2.5rem 4rem; border-top: 1px solid rgba(201,168,76,0.1); position: relative; z-index: 1; }
   .footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 0.5rem; }
   .footer-copy { font-size: 0.8rem; color: var(--mist-dim); font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
+
+  #about { padding: 8rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .about-content { display: grid; grid-template-columns: 1fr 1.8fr; gap: 4rem; align-items: start; }
+  .about-image-wrapper { position: relative; }
+  .about-image { width: 100%; height: auto; border: 1px solid rgba(201,168,76,0.25); filter: grayscale(15%); transition: filter 0.4s, border-color 0.4s; }
+  .about-image:hover { filter: grayscale(0%); border-color: rgba(201,168,76,0.45); }
+  .about-text p { margin-bottom: 1.25rem; color: var(--mist); line-height: 1.85; }
+  .about-text p:first-of-type::first-letter { font-size: 3.2em; line-height: 0.85; float: left; font-family: 'Cinzel Decorative', serif; color: var(--gold); margin: 0.1em 0.15em 0 0; }
+  .about-focus-list { margin: 1.5rem 0 1.5rem 1.5rem; }
+  .about-focus-list li { color: var(--mist); margin-bottom: 0.5rem; position: relative; padding-left: 0.5rem; }
+  .about-focus-list li::before { content: '•'; position: absolute; left: -1rem; color: var(--gold); }
+  .about-quote { font-family: 'Cinzel', serif; font-size: 1.1rem; font-style: italic; color: var(--gold-light); text-align: center; margin: 2rem 0 0; padding: 1.5rem 2rem; border-top: 1px solid rgba(201,168,76,0.2); border-bottom: 1px solid rgba(201,168,76,0.2); letter-spacing: 0.05em; }
+  @media (max-width: 968px) {
+    .about-content { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-image-wrapper { max-width: 400px; margin: 0 auto; }
+  }
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">Malachi Tanoh · Kabbalistic Astrology</div>
+  <div class="nav-logo">
+    <span class="nav-logo-full">Malachi Tanoh · Kabbalistic Astrology</span>
+    <span class="nav-logo-short">MT</span>
+  </div>
   <ul>
+    <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
     <li><a href="#contact">Book a Reading</a></li>
@@ -411,6 +457,47 @@
     <div>
       <a href="#contact" class="btn-primary">Book a Reading</a>
       <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT MALACHI -->
+<section id="about">
+  <div class="section-header">
+    <p class="section-eyebrow">The Teacher</p>
+    <h2 class="section-title">About Malachi</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-content">
+    <div class="about-image-wrapper">
+      <img src="assets/malachi.png" alt="Malachi Tanoh" class="about-image">
+    </div>
+    <div class="about-text">
+      <p>My name is Malachi Ange Maxime Tanoh, also known by my Hebrew name, Malach ben Abraham. I am originally from Ivory Coast, West Africa, and I am a Torah and Kabbalah teacher, astrologer, researcher, and energy engineer based in the United States.</p>
+
+      <p>For more than 12 years, I have dedicated my life to the study of Torah, Kabbalah, Jewish mysticism, astrology, anthropology, psychology, and the hidden spiritual structure of creation. My journey into Kabbalah began through the teachings of my mother, who studied Kabbalistic wisdom for more than 30 years and inspired me to seek deeper spiritual truth.</p>
+
+      <p>My mission is to help people reconnect with their divine purpose, inner healing, and spiritual potential through authentic Torah wisdom and mystical teachings rooted in the traditions of the Zohar, the Arizal, and the ancient Hebrew sages. Through my lectures and teachings, I explore the connection between spirituality, astrology, consciousness, science, psychology, meditation, and the cosmic structure of the universe.</p>
+
+      <p>I teach that Kabbalah is not superstition or fantasy, but a profound spiritual science that helps humanity understand the soul, the energy of the universe, the sefirot, divine consciousness, and the deeper meaning behind life experiences and world events.</p>
+
+      <p>My work also focuses on:</p>
+      <ul class="about-focus-list">
+        <li>Kabbalistic astrology and soul purpose</li>
+        <li>The Tree of Life and the sefirot</li>
+        <li>Meditation and prophetic consciousness</li>
+        <li>Relationships and spiritual psychology</li>
+        <li>Jewish mysticism and modern science</li>
+        <li>The spiritual roots of human behavior</li>
+        <li>Ancient Hebrew wisdom and global history</li>
+        <li>The connection between Torah, creation, and the cosmos</li>
+      </ul>
+
+      <p>Alongside my spiritual studies, I hold a Bachelor's degree in Petroleum and Gas Engineering from the Petroleum-Gas University of Ploiești and specialized in Sustainable Energy Management and Policy at Pennsylvania State University.</p>
+
+      <p>Through this platform, my goal is to create a space where seekers from all backgrounds can learn, grow spiritually, and reconnect with the wisdom of the soul in an authentic and transformative way.</p>
+
+      <p class="about-quote">"Wisdom is the bridge between the physical and the spiritual worlds."</p>
     </div>
   </div>
 </section>
