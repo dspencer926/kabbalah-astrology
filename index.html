@@ -58,12 +58,40 @@
   .nav-logo { font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; }
   .nav-logo-full { display: inline; }
   .nav-logo-short { display: none; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.5rem; z-index: 101; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--gold); transition: all 0.3s; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
   @media (max-width: 768px) {
     .nav-logo-full { display: none; }
     .nav-logo-short { display: inline; }
     nav { padding: 1.2rem 1.5rem; }
-    nav ul { gap: 1.5rem; }
-    nav ul a { font-size: 10px; }
+    .hamburger { display: flex; }
+    nav ul {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 250px;
+      background: rgba(5,3,15,0.98);
+      border-left: 1px solid rgba(201,168,76,0.2);
+      backdrop-filter: blur(12px);
+      flex-direction: column;
+      gap: 0;
+      padding: 5rem 0 2rem;
+      transition: right 0.3s ease;
+    }
+    nav ul.active { right: 0; }
+    nav ul li { width: 100%; border-bottom: 1px solid rgba(201,168,76,0.1); }
+    nav ul a {
+      display: block;
+      padding: 1.2rem 2rem;
+      font-size: 11px;
+      width: 100%;
+      transition: background 0.3s, color 0.3s;
+    }
+    nav ul a:hover { background: rgba(201,168,76,0.08); }
     .hero-lower > div {
       display: flex;
       flex-direction: column;
@@ -248,7 +276,7 @@
   .footer-logo { font-family: 'Cinzel Decorative', serif; font-size: 1.1rem; color: var(--gold); margin-bottom: 0.5rem; }
   .footer-copy { font-size: 0.8rem; color: var(--mist-dim); font-family: 'Cinzel', serif; letter-spacing: 0.15em; }
 
-  #about { padding: 8rem 4rem; max-width: 1200px; margin: 0 auto; }
+  #about { padding: 8rem 4rem 3rem; max-width: 1200px; margin: 0 auto; }
   .about-content { display: grid; grid-template-columns: 1fr 1.8fr; gap: 4rem; align-items: start; }
   .about-image-wrapper { position: relative; }
   .about-image { width: 100%; height: auto; border: 1px solid rgba(201,168,76,0.25); filter: grayscale(15%); transition: filter 0.4s, border-color 0.4s; }
@@ -272,6 +300,11 @@
     <span class="nav-logo-full">Malachi Tanoh · Kabbalistic Astrology</span>
     <span class="nav-logo-short">MT</span>
   </div>
+  <button class="hamburger" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <ul>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
@@ -648,6 +681,33 @@
   <p class="footer-logo">Malachi Tanoh</p>
   <p class="footer-copy">Kabbalistic Astrology · New York City · Sessions by appointment</p>
 </footer>
+
+<script>
+  const hamburger = document.querySelector('.hamburger');
+  const navMenu = document.querySelector('nav ul');
+  const navLinks = document.querySelectorAll('nav ul a');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+  });
+
+  // Close menu when clicking a link
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav')) {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+    }
+  });
+</script>
 
 </body>
 </html>
